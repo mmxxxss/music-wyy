@@ -102,7 +102,7 @@ export default {
     },
     handleToStandradTime(time) {
       let minute = Math.floor(time / 60);
-      let second = Math.floor(time % 60) + 1;
+      let second = Math.floor(time % 60);
       if (second < 10) {
         second = "0" + second;
       } else {
