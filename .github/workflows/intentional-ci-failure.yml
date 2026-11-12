@@ -1,0 +1,21 @@
+name: Intentional CI failure demo
+
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  intentional-failure:
+    name: Intentional failure (do not merge)
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Fail deliberately for CI observation
+        shell: bash
+        run: |
+          echo '::error::Intentional CI failure for observation. Do not merge this demo PR.'
+          exit 1
