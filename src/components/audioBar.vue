@@ -101,8 +101,8 @@ export default {
       this.sliderValue = (e.target.currentTime * 1000) / this.duration;
     },
     handleToStandradTime(time) {
-      let minute = Math.floor(time / 60);
-      let second = (time / 60 - minute) * 60;
+      let minute = Math.floor(time / 60) + 1;
+      let second = Math.floor(time % 60);
       if (second < 10) {
         second = "0" + second;
       } else {

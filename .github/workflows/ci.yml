@@ -1,0 +1,27 @@
+name: CI regression
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-regression-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  audio-duration:
+    name: Audio duration regression
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run production audio duration regression tests
+        run: node --test tests/audio-duration.test.cjs
