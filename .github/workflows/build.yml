@@ -32,4 +32,7 @@ jobs:
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
       - name: Build production assets
+        # Vue CLI 4's Terser plugin needs MD4 for its build cache on OpenSSL 3.
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
         run: pnpm run build
